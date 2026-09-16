@@ -6,10 +6,36 @@ import java.util.Set;
 public class Main {
 
     public static void main(String[] args) {
-        var left = List.of(3, 8);
-        var right = List.of(4, 5);
+        System.out.println(mergeSort(List.of(9, 8, 3, 11, 4, 5, 9)));
+    }
 
-        System.out.println(merge(left, right));
+    private static List<Integer> mergeSort(List<Integer> values) {
+        if (values.size() <= 1) return values;// condição de parada
+
+        List<Integer> left = new ArrayList<>();
+        List<Integer> right = new ArrayList<>();
+        List<Integer> sortedLeft;
+        List<Integer> sortedRight;
+
+        int i = 0;
+        var middle = values.size() / 2;// calcula middle
+
+        // cria left e right
+        for (; i < middle; i++) {
+            left.add(values.get(i));
+        }
+        for (; i < values.size(); i++) {
+            right.add(values.get(i));
+        }
+
+        // ordena left recursivamente
+        sortedLeft = mergeSort(left);
+
+        // ordena right recursivamente
+        sortedRight = mergeSort(right);
+
+
+        return merge(sortedLeft, sortedRight);
     }
 
     private static List<Integer> merge(List<Integer> left, List<Integer> right) {
@@ -18,7 +44,7 @@ public class Main {
         int j = 0;
 
         while (i < left.size() && j < right.size()) {
-            if (left.get(i) < right.get(j)) {
+            if (left.get(i) <= right.get(j)) {
                 sortedList.add(left.get(i));
                 i++;
             } else {
@@ -27,6 +53,15 @@ public class Main {
             }
         }
 
+        while (i < left.size()) {
+            sortedList.add(left.get(i));
+            i++;
+        }
+
+        while (j < right.size()) {
+            sortedList.add(right.get(j));
+            j++;
+        }
 
         return sortedList;
     }
