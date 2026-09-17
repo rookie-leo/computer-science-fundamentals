@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/merge_sort.iml" filepath="$PROJECT_DIR$/merge_sort.iml" />
+      <module fileurl="file://$PROJECT_DIR$/data-structures/trees/MyLittleTree/MyLittleTree.iml" filepath="$PROJECT_DIR$/data-structures/trees/MyLittleTree/MyLittleTree.iml" />
     </modules>
   </component>
 </project>

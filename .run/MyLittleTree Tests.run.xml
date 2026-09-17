@@ -1,0 +1,9 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="MyLittleTree Tests" type="Application" factoryName="Application">
+    <option name="MAIN_CLASS_NAME" value="TestRunner" />
+    <module name="MyLittleTree" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>
