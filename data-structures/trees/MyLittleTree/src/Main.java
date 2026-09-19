@@ -1,13 +1,11 @@
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
     public static void main(String[] args) {
-//        System.out.println(buildFromLevelOrder(Arrays.asList(8, 3, 10, 1, 6, 14, 4)));
-        buildFromLevelOrder(Arrays.asList(8, 3, 10, 1, 6, 14, 4));
+        System.out.println(buildFromLevelOrder(Arrays.asList(8, 3, 10, 1, 6, 14, 4)));
+        System.out.println(buildFromLevelOrder(Arrays.asList(8, 3, 10, 1, 6, 14, 4)));
+        System.out.println(buildFromLevelOrder(List.of(8)));
+        System.out.println(List.of());
     }
 
     /**
@@ -20,50 +18,35 @@ public class Main {
      * Antes de implementar, registre sua estrategia, tempo e espaco.
      */
     private static Node buildFromLevelOrder(List<Integer> values) {
-        if (values.isEmpty()) return null;
+        if (values.isEmpty()) return new Node();
 
         Node root = new Node();
-        List<Node> nodes = new ArrayList<>();
-//        root.setValue(values.getFirst());
-        int i = 0;
+        Queue<Node> queue = new ArrayDeque<>();
+        int i = 1;
 
-        while (i < values.size()) {
-            Node actualRoot = new Node();
-            Node left = new Node();
-            Node right = new Node();
+        root.setValue(values.getFirst());
 
-            if (i == 0) {
-                root.setValue(values.get(i));//8
-                actualRoot.setValue(values.get(i));//8
-                i++;
-                left.setValue(values.get(i));//3
-                i++;
-                right.setValue(values.get(i));//10
-                i++;
+        queue.add(root);
 
-                actualRoot.setLeft(left);
-                actualRoot.setRight(right);
-                root.setLeft(actualRoot);
+        while (i < values.size() && !queue.isEmpty()) {
+            Node actualNode = queue.remove();
+
+            if (i < values.size()) {
+                Node leftNode = new Node();
+                leftNode.setValue(values.get(i));
+                actualNode.setLeft(leftNode);
+                queue.add(leftNode);
+                i++;
             }
 
-            actualRoot.setValue(values.get(i));
-
-            for (; i < values.size(); i++) {
-                if (i % 2 == 0) {
-                    left.setValue(values.get(i));
-                    i++;
-                } else {
-                    right.setValue(values.get(i));
-                    i++;
-                }
+            if (i < values.size()) {
+                Node rightNode = new Node();
+                rightNode.setValue(values.get(i));
+                actualNode.setRight(rightNode);
+                queue.add(rightNode);
+                i++;
             }
-
-            actualRoot.setLeft(left);
-            actualRoot.setRight(right);
-            root.setLeft(actualRoot);
         }
-
-        System.out.println(root);
 
         return root;
     }
